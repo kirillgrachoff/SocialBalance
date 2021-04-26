@@ -1,7 +1,38 @@
+<title>Leaderboard</title>
+
+<h1>Social Credit Points Leaderboard</h1>
+
 <table>
     {% for i in range(0, len) %}
     <tr>
-        <td><b>{{ data[i].name }}</b></td><td>{{ data[i].score }}</td>
+        <td>
+            <b>{{ i + 1 }}.</b>
+        </td>
+        <td>
+            <b>
+                <a href='/info/{{ data[i].name }}'>
+                    {{ data[i].name }}
+                </a>
+            </b>
+        </td>
+        <td>
+            {{ data[i].score }}
+        </td>
+        <td>
+            <form method="POST" action="/increase/{{ data[i].name }}"><input type="submit" name="inc" value="+1"></form>
+        </td>
+        <td>
+            <form method="POST" action="/decrease/{{ data[i].name }}"><input type="submit" name="inc" value="-1"></form>
+        </td>
     </tr>
     {% endfor %}
 </table>
+
+<form method="POST" action="{{ url_for('add_person') }}">
+    <p><b>name:</b><br>
+        <input type="text" size="40" name="newName">
+    </p>
+    <p>
+        <input type="submit" value="add">
+    </p>
+</form>

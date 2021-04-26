@@ -14,7 +14,7 @@ database_name = "database.db"
 def execute_database_command(command):
     with sqlite3.connect(os.path.abspath(database_path + '/' + database_name)) as con:
         cur = con.cursor()
-        return cur.execute(command)
+        return list(cur.execute(command))
 
 if not os.path.exists(database_path + '/' + database_name):
     os.system(f"mkdir -p {database_path}")
@@ -53,7 +53,7 @@ def increase_person(cur_name, score):
     cur_score_v = execute_database_command(f'''
     SELECT score FROM users WHERE name == "{cur_name}"
     ''')
-    cur_score = list(cur_score_v)[0][0]
+    cur_score = cur_score_v[0][0]
     execute_database_command(f'''
     UPDATE users SET score = {score + cur_score} WHERE name == "{cur_name}"
     ''')

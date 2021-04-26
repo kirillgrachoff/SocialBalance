@@ -1,5 +1,7 @@
-<ol>
+<table>
     {% for i in range(0, len) %}
-    <li>{{ data[i].name }}: {{ data[i].score }}</li>
+    <tr>
+        <td><b>{{ data[i].name }}</b></td><td>{{ data[i].score }}</td>
+    </tr>
     {% endfor %}
-</ol>
+</table>
